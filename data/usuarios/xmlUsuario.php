@@ -24,39 +24,39 @@ $start = $limit * $page - $limit;
 if ($start < 0)
     $start = 0;
 if ($search == 'false') {
-    $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' ORDER BY  $sidx $sord offset $start limit $limit";
+    $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega ORDER BY  $sidx $sord offset $start limit $limit";
 } else {
     $campo = $_GET['searchField'];
   
     if ($_GET['searchOper'] == 'eq') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'ne') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo != '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo != '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'bw') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'bn') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo not like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo not like '$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'ew') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'en') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo not like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo not like '%$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'cn') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'nc') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'in') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
     if ($_GET['searchOper'] == 'ni') {
-        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, U.cargo_usuario from usuario U where U.estado='Activo' and $campo not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "select U.id_usuario, U.nombre_usuario, U.apellido_usuario, U.ci_usuario, U.telefono_usuario, U.celular_usuario, U.clave, U.email_usuario, U.direccion_usuario, U.usuario, B.nombre_bodega, U.cargo_usuario from usuario U, bodegas B where U.estado='Activo' and U.id_bodega = B.id_bodega and $campo not like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
     }
 }
 $result = pg_query($SQL);
@@ -78,14 +78,15 @@ while ($row = pg_fetch_row($result)) {
     $s .= "<cell>" . $row[7] . "</cell>";
     $s .= "<cell>" . $row[9] . "</cell>";
     $s .= "<cell>" . $row[6] . "</cell>";
-    if ($row[10] == '1') {
-        $row[10] = 'Administrador';
+    $s .= "<cell>" . $row[10] . "</cell>";
+    if ($row[11] == '1') {
+        $row[11] = 'Administrador';
     } else {
-        if ($row[10] == '2') {
-            $row[10] = 'Vendedor';
+        if ($row[11] == '2') {
+            $row[11] = 'Vendedor';
         }
     }
-    $s .= "<cell>" . $row[10] . "</cell>";
+    $s .= "<cell>" . $row[11] . "</cell>";
     $s .= "</row>";
 }
 $s .= "</rows>";

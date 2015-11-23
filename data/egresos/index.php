@@ -102,17 +102,33 @@ $cont1 = 0;
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label class="col-md-4">Ingrese un Origen:</label>
-                                <div class="form-group col-md-8 no-padding">                                
-                                  <input type="text" name="origen"  id="origen" placeholder="Ingrese el origen" class="form-control" />
+                                <div class="form-group col-md-8 no-padding">   
+                                  <select class="form-control" name="origen" id="origen">
+                                    <option value="">........Seleccione........</option>
+                                    <?php
+                                     $consulta = pg_query("select * from bodegas ");
+                                      while ($row = pg_fetch_row($consulta)) {
+                                        echo "<option id=$row[0] value=$row[0]>$row[1]</option>";
+                                      }
+                                    ?>     
+                                  </select>                             
                                 </div> 
                               </div>
                             </div>
 
                             <div class="col-md-6">
                               <div class="form-group">
-                                <label class="col-md-3">Ingrese un Destino:</label>
-                                <div class="form-group col-md-9 no-padding">                                
-                                  <input type="text" name="destino"  id="destino" placeholder="Ingrese el destino" class="form-control" />
+                                <label class="col-md-4">Ingrese un Destino:</label>
+                                <div class="form-group col-md-8 no-padding">
+                                  <select class="form-control" name="destino" id="destino">
+                                    <option value="">........Seleccione........</option>
+                                    <?php
+                                     $consulta = pg_query("select * from bodegas");
+                                      while ($row = pg_fetch_row($consulta)) {
+                                        echo "<option id=$row[0] value=$row[0]>$row[1]</option>";
+                                      }
+                                    ?>     
+                                  </select>                               
                                 </div> 
                               </div>
                             </div>

@@ -21,7 +21,7 @@ function inicio() {
     jQuery("#list").jqGrid({
         url: 'xmlUsuario.php',
         datatype: 'xml',
-        colNames: ['Cod. Usuario', 'CI Usuario', 'Nombres Usuario', 'Apellidos Usuario', 'Dirección Usuario', 'Teléfono Usuario', 'Celular Usuario', 'E-mail Usuario', 'User', 'Clave', 'Cargo'],
+        colNames: ['Cod. Usuario', 'CI Usuario', 'Nombres Usuario', 'Apellidos Usuario', 'Dirección Usuario', 'Teléfono Usuario', 'Celular Usuario', 'E-mail Usuario', 'User', 'Clave', 'Bodega', 'Cargo'],
         colModel: [
             {name: 'id_usuario', index: 'id_usuario', editable: true, align: 'center', width: '100', search: false, frozen: true, editoptions: {readonly: 'readonly'}},
             {name: 'ci_usuario', index: 'ci_usuario', editable: true, align: 'center', width: '100', size: '10', search: true, frozen: true, formoptions: {elmsuffix: " (*)"}, editrules: {required: true}, editoptions:{maxlength: 10, size:20,dataInit: function(elem){$(elem).bind("keypress", function(e) {return numeros(e)})}}}, 
@@ -33,6 +33,7 @@ function inicio() {
             {name: 'email_usuario', index: 'email_usuario', editable: true, align: 'center', width: '140', search: false, formatter: 'email'},
             {name: 'user', index: 'user', editable: true, align: 'center', width: '140', search: false, formoptions: {elmsuffix: " (*)"}, editrules: {required: true}},
             {name: 'password_usuario', index: 'password_usuario', editable: true, align: 'center', width: '140', search: false, formoptions: {elmsuffix: " (*)"}, editrules: {edithidden: true, required: true}, edittype: 'password', hidden: true},
+            {name: 'id_bodega', index:'id_bodega', width:'300',search: false, align: 'center', editable:true, edittype:"select", editoptions:{size:1, dataUrl:'retornar_combo.php'}},
             {name: 'cargo_usuario', index: 'cargo_usuario', width:'300',search: false, align: 'center', editable: true, edittype: "select", editoptions: {value: "1:Administrador;2:Vendedor"}},
         ],
         rowNum: 10,

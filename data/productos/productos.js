@@ -175,7 +175,7 @@ function guardar_producto(){
                                                 processData:false,
                                                 success: function(data, textStatus, jqXHR) {
                                                     var res=data;
-                                                    if(res == 1){
+                                                    if(res == 1) {
                                                         alertify.success('Datos Agregados Correctamente');						    		
                                                         setTimeout(function() {
                                                             location.reload();

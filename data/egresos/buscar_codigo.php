@@ -5,7 +5,7 @@ include '../../procesos/base.php';
 conectarse();
 $texto2 = $_GET['term'];
 
-$consulta = pg_query("select * from productos where codigo like '%$texto2%' and estado = 'Activo'");
+$consulta = pg_query("select * from productos T, bodega_productos P, bodegas B, usuario U where T.cod_productos = P.cod_productos and  P.id_bodega = B.id_bodega and U.id_bodega = B.id_bodega and U.id_usuario = '1' and T.codigo like '%$texto2%' and T.estado = 'Activo'");
 while ($row = pg_fetch_row($consulta)) {
     $data[] = array(
         'value' => $row[1],
@@ -16,7 +16,7 @@ while ($row = pg_fetch_row($consulta)) {
         'iva_producto' => $row[4],
         'cod_producto' => $row[0],
         'incluye' => $row[26],
-        'disponibles' => $row[13]
+        'disponibles' => $row[30]
     );
 }
 

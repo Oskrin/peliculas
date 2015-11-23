@@ -48,8 +48,15 @@ for ($i = 0; $i <= $nelem; $i++) {
     $cont2++;
     // fin 
 
-    // guardar detalle_factura
+    // guardar detalle_inventario
     pg_query("insert into detalle_inventario values('$cont2','$cont1','$arreglo1[$i]','$arreglo2[$i]','$arreglo3[$i]','$arreglo4[$i]','$arreglo5[$i]','$arreglo6[$i]','Activo')");
+    // fin
+
+    // modificar productos bodegas 
+    // pg_query("Update bodega_productos Set stock_bodega = '" .$arreglo4[$i]. "' where cod_productos='" .$arreglo1[$i]. "' and id_bodega = '1'");
+    // fin
+
+    // modificar productos 
     pg_query("Update productos Set stock='" .$arreglo4[$i]. "' ,existencia='" . $arreglo4[$i] . "', diferencia='" . $arreglo6[$i] . "' where cod_productos='" . $arreglo1[$i] . "'");
     // fin
 

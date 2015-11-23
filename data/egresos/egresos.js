@@ -401,56 +401,72 @@ function comprobar2() {
 function guardar_egreso() {
     var tam = jQuery("#list").jqGrid("getRowData");
     
-    if (tam.length === 0) {
-        $("#codigo_barras").focus();
-        alertify.error("Error... Ingrese productos");
+    if ($("#origen").val() == "") {
+        $("#origen").focus();
+        alertify.error("Seleccione el origen");
     } else {
-        $("#btnGuardar").attr("disabled", true);
-        var v1 = new Array();
-        var v2 = new Array();
-        var v3 = new Array();
-        var v4 = new Array();
-        var v5 = new Array();
+        if ($("#destino").val() == "") {
+            $("#destino").focus();
+            alertify.error("Seleccione el destino");
+        } else {
+            if ($("#origen").val() == $("#destino").val()) {
+                $("#destino").focus();
+                alertify.error("Seleccione direfentes bodegas");
+            } else {
+                if (tam.length == 0) {
+                    $("#codigo_barras").focus();
+                    alertify.error("Error... Ingrese productos");
+                } else {
 
-        var string_v1 = "";
-        var string_v2 = "";
-        var string_v3 = "";
-        var string_v4 = "";
-        var string_v5 = "";
+                    $("#btnGuardar").attr("disabled", true);
+                    var v1 = new Array();
+                    var v2 = new Array();
+                    var v3 = new Array();
+                    var v4 = new Array();
+                    var v5 = new Array();
 
-        var fil = jQuery("#list").jqGrid("getRowData");
-        for (var i = 0; i < fil.length; i++) {
-            var datos = fil[i];
-            v1[i] = datos['cod_producto'];
-            v2[i] = datos['cantidad'];
-            v3[i] = datos['precio_u'];
-            v4[i] = datos['descuento'];
-            v5[i] = datos['total'];
-        }
+                    var string_v1 = "";
+                    var string_v2 = "";
+                    var string_v3 = "";
+                    var string_v4 = "";
+                    var string_v5 = "";
 
-        for (i = 0; i < fil.length; i++) {
-            string_v1 = string_v1 + "|" + v1[i];
-            string_v2 = string_v2 + "|" + v2[i];
-            string_v3 = string_v3 + "|" + v3[i];
-            string_v4 = string_v4 + "|" + v4[i];
-            string_v5 = string_v5 + "|" + v5[i];
-        }
-        
-        $.ajax({
-            type: "POST",
-            url: "guardar_egresos.php",
-            data: "comprobante=" + $("#comprobante").val() + "&fecha_actual=" + $("#fecha_actual").val() + "&hora_actual=" + $("#hora_actual").val() + "&origen=" + $("#origen").val() + "&destino=" + $("#destino").val() + "&observaciones=" + $("#observaciones").val() + "&tarifa0=" + $("#total_p").val() + "&tarifa12=" + $("#total_p2").val() + "&iva=" + $("#iva").val() + "&desc=" + $("#desc").val() + "&tot=" + $("#tot").val() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5,
-            success: function(data) {
-                var val = data;
-                if (val == 1) {
-                    alertify.alert("Ingreso Guardado correctamente", function(){location.reload();});
-                }
-            }
-        });
-    }
+                    var fil = jQuery("#list").jqGrid("getRowData");
+                    for (var i = 0; i < fil.length; i++) {
+                        var datos = fil[i];
+                        v1[i] = datos['cod_producto'];
+                        v2[i] = datos['cantidad'];
+                        v3[i] = datos['precio_u'];
+                        v4[i] = datos['descuento'];
+                        v5[i] = datos['total'];
+                    }
+
+                    for (i = 0; i < fil.length; i++) {
+                        string_v1 = string_v1 + "|" + v1[i];
+                        string_v2 = string_v2 + "|" + v2[i];
+                        string_v3 = string_v3 + "|" + v3[i];
+                        string_v4 = string_v4 + "|" + v4[i];
+                        string_v5 = string_v5 + "|" + v5[i];
+                    }
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "guardar_egresos.php",
+                        data: "comprobante=" + $("#comprobante").val() + "&fecha_actual=" + $("#fecha_actual").val() + "&hora_actual=" + $("#hora_actual").val() + "&origen=" + $("#origen").val() + "&destino=" + $("#destino").val() + "&observaciones=" + $("#observaciones").val() + "&tarifa0=" + $("#total_p").val() + "&tarifa12=" + $("#total_p2").val() + "&iva=" + $("#iva").val() + "&desc=" + $("#desc").val() + "&tot=" + $("#tot").val() + "&campo1=" + string_v1 + "&campo2=" + string_v2 + "&campo3=" + string_v3 + "&campo4=" + string_v4 + "&campo5=" + string_v5,
+                        success: function(data) {
+                            var val = data;
+                            if (val == 1) {
+                                alertify.alert("Ingreso Guardado correctamente", function(){location.reload();});
+                            }
+                        }
+                    });
+                } 
+            }   
+        }    
+    }    
 }
 
-function flecha_atras(){
+function flecha_atras() {
    $.ajax({
         type: "POST",
         url: "../../procesos/flechas.php",
@@ -536,7 +552,7 @@ function flecha_atras(){
     });
 } 
 
-function flecha_siguiente(){
+function flecha_siguiente() {
    $.ajax({
         type: "POST",
         url: "../../procesos/flechas.php",
@@ -641,7 +657,7 @@ function limpiar_campo1(){
     }
 }
 
-function limpiar_campo2(){
+function limpiar_campo2() {
     if($("#producto").val() == ""){
         $("#cod_producto").val("");
         $("#codigo_barras").val("");

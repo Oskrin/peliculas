@@ -15,6 +15,7 @@ while ($row = pg_fetch_row($consulta)) {
     $_SESSION['nombres'] = $row[1] . " " . $row[2];
     $_SESSION['cargo'] = $row[6];
     $_SESSION['user'] = $row[10];
+    $_SESSION['bodega'] = $row[11];
     $consulta2 = pg_query("select * from empresa");
     while ($row = pg_fetch_row($consulta2)) {
         $_SESSION['empresa'] = $row[1];
